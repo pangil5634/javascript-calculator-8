@@ -45,7 +45,7 @@ class App {
     }
 
     // 문자열에서 정수형으로 변환 및 합계 계산
-    numbers.map(e => result += Number(e));
+    result = numbers.reduce((sum, n) => sum + Number(n), 0);
 
     // 결과 출력
     Console.print("결과 : " + result);
