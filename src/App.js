@@ -5,6 +5,12 @@ class App {
     // 문자열 입력
     const INPUT = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
+    // 에러 처리 (빈 문자열 입력한 경우)
+    if (INPUT.length === 0) {
+      Console.print("결과 : 0");
+      return; 
+    }
+
     let arr = []; // 계산을 위한 배열 선언
     let result = 0; // 결과를 위한 변수 선언
 
