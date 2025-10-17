@@ -15,45 +15,28 @@ class App {
     let result = 0; // 결과를 위한 변수 선언
 
     // 커스텀 구분자 존재 여부 확인에 따른 분기
-    if (INPUT.startsWith("//")) {
-      // 분기1 : 커스텀 구분자 존재 O
+    const customMatch = INPUT.match(/^\/\/(.+?)\\n([\d\D]+)$/);
 
-      // \n으로 커스텀 구분자 포함 문자열과 파싱 문자열을 구분
-      let splitArr = INPUT.split("\\n"); 
-      let custom = splitArr[0].slice(-1 * (splitArr[0].length - 2));  // 커스텀 구분자 추출
-      let parsing = splitArr[1];                                      // 파싱 문자열 추출
+    // 구분자로 파싱 문자열 분리
+    if (customMatch) {
+      // 커스텀 구분자인 경우
 
-      if (parsing.includes(custom)) {
-        // 커스텀 구분자로 파싱 문자열을 분리
-        numbers = parsing.split(custom);
+      const custom = customMatch[1]; // 커스텀 구분자
+      const parsing = customMatch[2]; // 파싱 문자열
+
+      // 파싱 문자열에 커스텀 구분자가 존재하는지 검사
+      if (!parsing.includes(custom)) {
+        // 커스텀 구분자가 없는 경우, 기본 구분자로 파싱 문자열 분리
+        numbers = parsing.split(/,|:/);
       } else {
-        // 에러 처리 : 커스텀 구분자 없는 문자열
-        throw new Error("[ERROR] String must include custom seperator");
-        
+        // 커스텀 구분자가 있는 경우, 커스텀 구분자로 파싱 문자열 분리
+        numbers = parsing.split(custom);
       }
+    } else {
+      // 기본 구분자인 경우
 
-      // 에러 처리 : 음수 입력
-      numbers.map((e) => {
-        if (Number(e) < 0) {
-          throw new Error("[ERROR] Only positive integers can be entered");
-          
-        }
-      });
-    }else {
-      // 분기2 : 커스텀 구분자 존재 X
-
-      // 에러 처리 : 음수 입력
-      if (INPUT.includes('-')) {
-        throw new Error("[ERROR] Only positive integers can be entered");
-        
-      }
-
-      let temp = []; // 파싱 문자열 분리 위한 임시 변수
-      
-      // 콤마(,)로 파싱 문자열을 분리
-      INPUT.split(",").map(e => temp.push(e));
-      // 콜론(:)으로 파싱 문자열을 분리
-      temp.map(e => e.split(":").map(e => numbers.push(e)));
+      // 기본 구분자로 파싱 문자열 분리
+      numbers = INPUT.split(/,|:/);
     }
 
     // 문자열에서 정수형으로 변환 및 합계 계산
