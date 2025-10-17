@@ -7,7 +7,7 @@ class App {
 
     let arr = []; // 계산을 위한 배열 선언
     let result = 0; // 결과를 위한 변수 선언
-    
+
     // 커스텀 구분자 존재 여부 확인에 따른 분기
     if (INPUT.slice(0, 2) === "//") {
       // 분기1 : 커스텀 구분자 존재 O
@@ -32,6 +32,9 @@ class App {
 
     // 문자열에서 정수형으로 변환 및 합계 계산
     arr.map(e => result += Number(e));
+
+    // 결과 출력
+    Console.print("결과 : " + result);
   }
 }
 
