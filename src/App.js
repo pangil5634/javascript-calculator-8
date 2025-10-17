@@ -11,7 +11,7 @@ class App {
       return; 
     }
 
-    let arr = []; // 계산을 위한 배열 선언
+    let numbers = []; // 계산을 위한 배열 선언
     let result = 0; // 결과를 위한 변수 선언
 
     // 커스텀 구분자 존재 여부 확인에 따른 분기
@@ -25,7 +25,7 @@ class App {
 
       if (parsing.includes(custom)) {
         // 커스텀 구분자로 파싱 문자열을 분리
-        arr = parsing.split(custom);
+        numbers = parsing.split(custom);
       } else {
         // 에러 처리 : 커스텀 구분자 없는 문자열
         throw new Error("[ERROR] String must include custom seperator");
@@ -33,7 +33,7 @@ class App {
       }
 
       // 에러 처리 : 음수 입력
-      arr.map((e) => {
+      numbers.map((e) => {
         if (Number(e) < 0) {
           throw new Error("[ERROR] Only positive integers can be entered");
           
@@ -53,11 +53,11 @@ class App {
       // 콤마(,)로 파싱 문자열을 분리
       INPUT.split(",").map(e => temp.push(e));
       // 콜론(:)으로 파싱 문자열을 분리
-      temp.map(e => e.split(":").map(e => arr.push(e)));
+      temp.map(e => e.split(":").map(e => numbers.push(e)));
     }
 
     // 문자열에서 정수형으로 변환 및 합계 계산
-    arr.map(e => result += Number(e));
+    numbers.map(e => result += Number(e));
 
     // 결과 출력
     Console.print("결과 : " + result);
