@@ -27,7 +27,9 @@ class App {
       const custom = customMatch[1]; // 커스텀 구분자
       const parsing = customMatch[2]; // 파싱 문자열
 
-      delimiters.push(custom);
+      // 특수문자 이스케이프 처리
+      const escapedCustom = custom.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      delimiters.push(escapedCustom);
 
       // 파싱 문자열에 커스텀 구분자가 존재하는지 검사
       if (!parsing.includes(custom)) {
