@@ -6,7 +6,7 @@ class App {
     const INPUT = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
     // 에러 처리 (빈 문자열 입력한 경우)
-    if (INPUT.length === 0) {
+    if (INPUT === "") {
       Console.print("결과 : 0");
       return; 
     }
