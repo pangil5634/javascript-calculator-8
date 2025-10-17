@@ -28,14 +28,14 @@ class App {
         arr = parsing.split(custom);
       } else {
         // 에러 처리 : 커스텀 구분자 없는 문자열
-        throw new Error("String must include custom seperator");
+        throw new Error("[ERROR] String must include custom seperator");
         
       }
 
       // 에러 처리 : 음수 입력
       arr.map((e) => {
         if (Number(e) < 0) {
-          throw new Error("Only positive integers can be entered");
+          throw new Error("[ERROR] Only positive integers can be entered");
           
         }
       });
@@ -44,7 +44,7 @@ class App {
 
       // 에러 처리 : 음수 입력
       if (INPUT.includes('-')) {
-        throw new Error("Only positive integers can be entered");
+        throw new Error("[ERROR] Only positive integers can be entered");
         
       }
 
