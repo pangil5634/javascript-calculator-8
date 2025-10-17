@@ -17,6 +17,15 @@ class App {
 
       // 커스텀 구분자로 파싱 문자열을 분리
       arr = parsing.split(custom);
+    }else {
+      // 분기2 : 커스텀 구분자 존재 X
+
+      let temp = []; // 파싱 문자열 분리 위한 임시 변수
+      
+      // 콤마(,)로 파싱 문자열을 분리
+      INPUT.split(",").map(e => temp.push(e));
+      // 콜론(:)으로 파싱 문자열을 분리
+      temp.map(e => e.split(":").map(e => arr.push(e)));
     }
   }
 }
