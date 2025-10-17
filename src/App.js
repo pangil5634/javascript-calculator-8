@@ -44,7 +44,17 @@ class App {
       throw new Error("[ERROR] Invalid syntax: separator cannot be consecutive or at the end");
     }
 
-    // 문자열에서 정수형으로 변환 및 합계 계산
+    // 문자열에서 정수형으로 변환 및 유효성 검사
+    numbers = numbers.map((n) => {
+      const num = Number(n.trim()); // 숫자 변환 및 공백 제거
+      if (isNaN(num)) {
+        throw new Error("[ERROR] Must input the number and seperator");
+      }
+
+      return num;
+    });
+
+    // 합계 계산
     result = numbers.reduce((sum, n) => sum + Number(n), 0);
 
     // 결과 출력
