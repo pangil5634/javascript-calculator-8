@@ -19,7 +19,7 @@ class App {
 
     // 구분자로 파싱 문자열 분리
     if (customMatch) {
-      // 커스텀 구분자인 경우
+      // 1) 커스텀 구분자인 경우
 
       const custom = customMatch[1]; // 커스텀 구분자
       const parsing = customMatch[2]; // 파싱 문자열
@@ -33,10 +33,15 @@ class App {
         numbers = parsing.split(custom);
       }
     } else {
-      // 기본 구분자인 경우
+      // 2) 기본 구분자인 경우
 
       // 기본 구분자로 파싱 문자열 분리
       numbers = INPUT.split(/,|:/);
+    }
+
+    // 구분자로 끝나거나, 구분자 사이에 숫자가 없는 경우에 대한 검사
+    if (numbers.some(n => n.trim() === "")) {
+      throw new Error("[ERROR] Invalid syntax: separator cannot be consecutive or at the end");
     }
 
     // 문자열에서 정수형으로 변환 및 합계 계산
