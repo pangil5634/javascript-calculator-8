@@ -17,6 +17,9 @@ class App {
     // 커스텀 구분자 존재 여부 확인에 따른 분기
     const customMatch = INPUT.match(/^\/\/(.+?)\\n([\d\D]+)$/);
 
+    // 구분자 배열
+    const delimiters = [",", ":"];
+
     // 구분자로 파싱 문자열 분리
     if (customMatch) {
       // 1) 커스텀 구분자인 경우
@@ -24,13 +27,16 @@ class App {
       const custom = customMatch[1]; // 커스텀 구분자
       const parsing = customMatch[2]; // 파싱 문자열
 
+      delimiters.push(custom);
+
       // 파싱 문자열에 커스텀 구분자가 존재하는지 검사
       if (!parsing.includes(custom)) {
         // 커스텀 구분자가 없는 경우, 기본 구분자로 파싱 문자열 분리
         numbers = parsing.split(/,|:/);
       } else {
         // 커스텀 구분자가 있는 경우, 커스텀 구분자로 파싱 문자열 분리
-        numbers = parsing.split(custom);
+        const pattern = delimiters.join('|'); 
+        numbers = parsing.split(new RegExp(pattern));
       }
     } else {
       // 2) 기본 구분자인 경우
