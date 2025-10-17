@@ -25,8 +25,22 @@ class App {
 
       // 커스텀 구분자로 파싱 문자열을 분리
       arr = parsing.split(custom);
+
+      // 에러 처리 : 음수 입력
+      arr.map((e) => {
+        if (Number(e) < 0) {
+          throw new Error("Only positive integers can be entered");
+          
+        }
+      });
     }else {
       // 분기2 : 커스텀 구분자 존재 X
+
+      // 에러 처리 : 음수 입력
+      if (INPUT.includes('-')) {
+        throw new Error("Only positive integers can be entered");
+        
+      }
 
       let temp = []; // 파싱 문자열 분리 위한 임시 변수
       
