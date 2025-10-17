@@ -54,6 +54,11 @@ class App {
       return num;
     });
 
+    // 음수 검사
+    if (numbers.filter(n => n < 0).length > 0) {
+      throw new Error("[ERROR] Must input the positve number")
+    }
+
     // 합계 계산
     result = numbers.reduce((sum, n) => sum + Number(n), 0);
 
