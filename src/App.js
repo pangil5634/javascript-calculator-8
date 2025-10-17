@@ -15,7 +15,7 @@ class App {
     let result = 0; // 결과를 위한 변수 선언
 
     // 커스텀 구분자 존재 여부 확인에 따른 분기
-    if (INPUT.slice(0, 2) === "//") {
+    if (INPUT.startsWith("//")) {
       // 분기1 : 커스텀 구분자 존재 O
 
       // \n으로 커스텀 구분자 포함 문자열과 파싱 문자열을 구분
@@ -23,8 +23,14 @@ class App {
       let custom = splitArr[0].slice(-1 * (splitArr[0].length - 2));  // 커스텀 구분자 추출
       let parsing = splitArr[1];                                      // 파싱 문자열 추출
 
-      // 커스텀 구분자로 파싱 문자열을 분리
-      arr = parsing.split(custom);
+      if (parsing.includes(custom)) {
+        // 커스텀 구분자로 파싱 문자열을 분리
+        arr = parsing.split(custom);
+      } else {
+        // 에러 처리 : 커스텀 구분자 없는 문자열
+        throw new Error("String must include custom seperator");
+        
+      }
 
       // 에러 처리 : 음수 입력
       arr.map((e) => {
