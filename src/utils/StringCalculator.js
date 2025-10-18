@@ -50,7 +50,13 @@ export class StringCalculator {
                 numbers = PARSING.split(new RegExp(pattern));
             }
         } else {
-            // 2) 기본 구분자인 경우 기본 구분자로 파싱 문자열 분리
+            // 2) 기본 구분자인 경우 
+
+            // 커스텀 구분자 포맷이나, 입력하지 않는 경우에 대한 검사
+            if (input.startsWith("//\\n"))
+                input = input.replace(/^\/\/\\n/, '');
+
+            // 기본 구분자로 파싱 문자열 분리
             numbers = input.split(/,|:/);
         }
 
