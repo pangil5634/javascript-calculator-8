@@ -1,7 +1,13 @@
+// const ERROR_MESSAGES = {     INVALID_SYNTAX: '[ERROR] Invalid syntax:
+// separator cannot be consecutive or at the end',     INVALID_NUMBER: '[ERROR]
+// Must input numbers only',     NEGATIVE_NUMBER: '[ERROR] Must input positive
+// numbers',     MISSING_STRING : '[ERROR] Must Input string' };
+
 const ERROR_MESSAGES = {
-    INVALID_SYNTAX: '[ERROR] Invalid syntax: separator cannot be consecutive or at the end',
-    INVALID_NUMBER: '[ERROR] Must input numbers only',
-    NEGATIVE_NUMBER: '[ERROR] Must input positive numbers',
+    INVALID_FORMAT: '[ERROR] Invalid input format: separators cannot be consecutive or end the string',
+    INVALID_NUMBER: '[ERROR] Invalid number: input must contain numbers only',
+    NEGATIVE_NUMBER: '[ERROR] Invalid input: negative numbers are not allowed',
+    EMPTY_INPUT: '[ERROR] Input cannot be empty. Please enter a valid string.'
 };
 
 export class StringCalculator {
@@ -10,7 +16,7 @@ export class StringCalculator {
         // 0. 에러 처리 (빈 문자열 입력한 경우)
         if (input === '') 
             return 0;
-
+        
         // 1. 파싱 문자열 분리
         let numbers = this.parse(input);
 
@@ -50,11 +56,18 @@ export class StringCalculator {
                 numbers = PARSING.split(new RegExp(pattern));
             }
         } else {
-            // 2) 기본 구분자인 경우 
+            console.log("default");
+            // 2) 기본 구분자인 경우
 
-            // 커스텀 구분자 포맷이나, 입력하지 않는 경우에 대한 검사
-            if (input.startsWith("//\\n"))
+            // 입력이 "//\n"으로 시작하는 잘못된 커스텀 구분자 형식 제거
+            if (input.startsWith("//\\n")) 
                 input = input.replace(/^\/\/\\n/, '');
+
+            // 제거 후에도 입력 값이 비어 있다면, 문자열이 입력되지 않은 것으로 간주
+            if (!input) {
+                throw new Error(ERROR_MESSAGES.MISSING_STRING);
+
+            }
 
             // 기본 구분자로 파싱 문자열 분리
             numbers = input.split(/,|:/);
@@ -64,7 +77,7 @@ export class StringCalculator {
         return numbers;
     }
 
-     /** 숫자 배열 검증 */
+    /** 숫자 배열 검증 */
     validate(numbers) {
         // 1. 구분자로 끝나거나, 구분자 사이에 숫자가 없는 경우에 대한 검사
         if (numbers.some((n) => n.trim() === '')) {
