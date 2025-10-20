@@ -1,11 +1,4 @@
-// 에러 메세지 상수 모음
-const ERROR_MESSAGES = {
-  INVALID_FORMAT:
-    '[ERROR] Invalid input format: separators cannot be consecutive or end the string',
-  INVALID_NUMBER: '[ERROR] Invalid number: input must contain numbers only',
-  NEGATIVE_NUMBER: '[ERROR] Invalid input: negative numbers are not allowed',
-  EMPTY_INPUT: '[ERROR] Input cannot be empty. Please enter a valid string.',
-};
+import { ERROR_MESSAGES } from '../constants/ErrorMessages.js';
 
 export class StringCalculator {
   /** 문자열을 더하는 주요 메서드 */
@@ -33,6 +26,8 @@ export class StringCalculator {
     // 1. 파싱 문자열을 배열로 변환하기
     if (customMatch) {
       // 1) 커스텀 구분자인 경우
+
+      // 정규식 결과 분리
       const customDelimiter = customMatch[1]; // 커스텀 구분자
       const parsingString = customMatch[2]; // 파싱 문자열
 
@@ -41,6 +36,8 @@ export class StringCalculator {
         /[.*+?^${}()|[\]\\]/g,
         '\\$&',
       );
+
+      // 다중 특수문자를 기존의 구분자 배열에 추가
       delimiters.push(escapedCustomDelimiter);
 
       // 파싱 문자열에 커스텀 구분자가 존재하는지 검사
