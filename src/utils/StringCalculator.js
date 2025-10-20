@@ -65,7 +65,7 @@ export class StringCalculator {
 
             // 제거 후에도 입력 값이 비어 있다면, 문자열이 입력되지 않은 것으로 간주
             if (!input) {
-                throw new Error(ERROR_MESSAGES.MISSING_STRING);
+                throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
 
             }
 
@@ -88,7 +88,7 @@ export class StringCalculator {
         numbers = numbers.map((n) => {
             const NUM = Number(n.trim()); // 숫자 변환 및 공백 제거
             if (isNaN(NUM)) {
-                throw new Error(ERROR_MESSAGES.INVALID_SYNTAX);
+                throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
             }
 
             return NUM;
