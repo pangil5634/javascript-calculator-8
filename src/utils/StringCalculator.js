@@ -56,7 +56,6 @@ export class StringCalculator {
                 numbers = PARSING.split(new RegExp(pattern));
             }
         } else {
-            console.log("default");
             // 2) 기본 구분자인 경우
 
             // 입력이 "//\n"으로 시작하는 잘못된 커스텀 구분자 형식 제거
